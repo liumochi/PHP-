@@ -69,11 +69,21 @@ if(isset($_GET['sub'])){
         </tr>
         <?php
         if(isset($_GET['sub'])){
-            echo"<tr>";
-            echo"<td cosplan='4'>";
-            echo  "结果为：".$num1.$ysf.$num2.'='.$sub."";
-            echo"</td>";
-            echo"</tr>";
+            echo "<tr>";
+            echo "<td colspan='4'>";
+            if($flag==false){
+                echo $message;
+            }else{
+                if($nn==0){
+                    echo $message;
+                }else{
+                    echo "结果为: ".$num1." ".$ysf." ".$num2." = ".$sum;
+                }
+
+            }
+
+            echo "</td>";
+            echo "</tr>";
         }
         ?>
     </form>

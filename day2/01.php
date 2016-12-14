@@ -18,6 +18,15 @@ switch($value){
     case 'add';
     echo"<script>alert('增加功能')</script>";
     break;
+    case 'del';
+        echo"<script>alert('删除功能')</script>";
+        break;
+    case 'search';
+        echo"<script>alert('搜索功能')</script>";
+        break;
+    case 'update';
+        echo"<script>alert('更新功能')</script>";
+        break;
 
 }
 
