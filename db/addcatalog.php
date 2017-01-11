@@ -11,6 +11,7 @@ if(isset($_POST['sub'])){
     $sql = "select * from catalog where cname='$_cname'";
     $query = mysqli_query($link,$sql);
     $result = mysqli_fetch_array($query);
+
     if($result){
         echo"<script>alert('当前分类已存在')</script>";
         echo"<script>location='addcatalog.php'</script>";
