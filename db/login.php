@@ -16,11 +16,13 @@ if(isset($_POST['sub'])){
     $name = $_POST['name'];
     $pass = $_POST['pass'];
     $uri = $_POST['uri'];
-    $sql = "select * from user where uname='name' and pass='$pass'";
+    $sql = "select * from user where uname='$name' and pass='$pass'";
+    //echo $sql;
+    //die();
     $query = mysqli_query($link,$sql);
-    $rs= mysqli_fetch_array($query);
+    $rs=mysqli_fetch_array($query);
     if($rs){
-        setcookie('id',$rs['id'],time()+60);
+        setcookie('id',$rs['uid'],time()+60);
         setcookie('name',$rs['uname'],time()+60);
         echo "<script>location='$uri'</script>";
     }

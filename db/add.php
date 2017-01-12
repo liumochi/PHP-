@@ -1,4 +1,19 @@
 <?php
+    if(!isset($_COOKIE['id'])){
+        $str = $_SERVER['REQUEST_URI'];
+        $arr = explode('/',$str);
+        $num = count($arr)-1;
+        $uri = $arr["num"];
+        header("location:login.php?uri = $uri");
+    }
+
+
+
+?>
+
+
+
+<?php
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -7,12 +22,14 @@
  */
 
 include "conn.php";
+
 if(isset($_POST['sub'])){
-    echo "aa";
     $title = $_POST['title'];
-    $cid = $_POST['cid'];
+    $cid = $_POST['catalog'];
     $con = $_POST['con'];
-    $sql = "insert into blog(wid,title,content,time,cid) values(null,'$title','$con',now(),'$cid')";
+    $uid=$_COOKIE['id'];
+    $sql = "insert into blog(wid,title,content,time,cid,uid) values(null,'$title','$con',now(),'$cid','$uid')";
+
     $query = mysqli_query($link,$sql);
 
     if($query){
@@ -41,6 +58,7 @@ if(isset($_POST['sub'])){
         ?>
     </select><br/>
     内容: <textarea name="con"cols="30" rows="10"></textarea>
+    <input type="hidden" name="cid" vlaues = <?php echo $rs['cid'] ?> >
     <input type="submit" name="sub" values="添加">
 
 </form>
