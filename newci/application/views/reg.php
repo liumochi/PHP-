@@ -18,4 +18,30 @@
     <input type="submit" name="sub" value="注册">
 </form>
 </div>
+<script>
+    $(function () {
+        $('#p2').blur(function () {
+            var pass=$('#p1').val();
+            var rpass=$('#p2').val();
+            if(pass!=rpass){
+                var oSpan=$('<span id="s1">密码不一致</span>');
+                $(this).after(oSpan);
+
+            }
+        });
+            $('#p2').focus(function () {
+                $('#s1').remove();
+
+            });
+            $('#i1').blur(function () {
+                var name=$(this).val();
+                $.post('<?php echo site_url('user/checkname')?>','uname='+name,function (data) {
+                    if(data=='success'){
+                        var oSpan=$('<span id="s1">用户名重名</span>');
+                        $('#i1').after(oSpan);
+                    }
+                })
+            })
+    });
+</script>
 

@@ -28,8 +28,9 @@ class User_model extends CI_Model
         );
         return $query = $this->db->insert('user', $arr);
     }
-    public function get_check(){
-
+    public function get_check($name){
+    $query=$this->db->get_where('user',array('uname'=>$name));
+    return $query->row();
     }
         public function get_sel(){
 
