@@ -59,14 +59,22 @@ class User extends CI_Controller
 
         $this->load->view('login.php');
     }
-    public function do_login(){
+    public function checkname(){
         $name=$this->input->post('uname');
-        $pass=$this->input->post('pass');
         $this->load->model('user_model');
-        $this->user_model->get_sel($name,$pass);
-        $rs = $this->user_model->get_insert($name,$pass);
-
+        $rs=$this->user_model->get_check($name);
+        if($rs){
+            echo "success";
+        }
     }
+//    public function do_login(){
+//        $name=$this->input->post('uname');
+//        $pass=$this->input->post('pass');
+//        $this->load->model('user_model');
+//        $this->user_model->get_sel($name,$pass);
+//        $rs = $this->user_model->get_insert($name,$pass);
+//
+//    }
 }
 
 ?>
