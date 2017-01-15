@@ -21,19 +21,40 @@ class User_model extends CI_Model
 
     public function get_insert($name, $pass)
     {
-        //$query=$this->db->query("insert into user(uid,uname,pass) values(null,'$name','$pass')");
-        $arr = array(
-            'uname' => $name,
-            'pass' => $pass
-        );
-        return $query = $this->db->insert('user', $arr);
+        $query=$this->db->query("insert into user(uid,uname,pass) values(null,'$name','$pass')");
+//        $arr = array(
+//            'uname' => $name,
+//            'pass' => $pass
+//        );
+        return $query;
     }
     public function get_check($name){
     $query=$this->db->get_where('user',array('uname'=>$name));
     return $query->row();
     }
-        public function get_sel(){
+        public function get_sel($name,$pass){
+        $arr=array(
+            'uname'=>$name,
+            'pass'=>$pass
+        );
+        $query=$this->db->get_where('user',$arr);
+        return $query->row();
+    }
+    public function get_data(){
+            $query=$this->db->get('blog');
+            return $query->result();
 
+    }
+
+
+    public function fenye($startno,$pagenum){
+            $query=$this->db->get('blog',$pagenum,$startno);
+
+    }
+
+
+    public function get_allrows(){
+        $query=$this->db->get('fenye');
     }
 
 }

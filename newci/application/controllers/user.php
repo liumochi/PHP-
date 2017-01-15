@@ -12,11 +12,16 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->load->view('reg.php');
+        //$this->load->library
+
     }
-//            public function index(){
-//
-//            }
+      public function index(){
+                $this->load->model('user_model');
+                $rs=$this->user_model->get_data();
+                //fenye
+                $arr['blog']=$rs;
+                $this->load->view('index.php',$arr);
+            }
     public function reg()
     {
         //把view中reg.php在浏览器展示;
@@ -50,8 +55,10 @@ class User extends CI_Controller
 
     public function check()
     {
-        $this->input->post('uname');
-
+        $name=$this->input->post('uname');
+        $this->load->model('user_model');
+        $this->user_model->get_check($name);
+        echo "success";
     }
 
     public function login()
@@ -59,6 +66,25 @@ class User extends CI_Controller
 
         $this->load->view('login.php');
     }
+
+    public function do_login(){
+        $name=$this->input->post('uname');
+        $pass=$this->input->post('pass');
+        $this->load->model('user_model');
+        $rs = $this->user_model->get_sel($name,$pass);
+        if($rs){
+            $arr=array(
+                'id'=>$rs->uid,
+                'name'=>$rs->uname
+            );
+            $this->session->set_userdata($arr);
+
+            redirect('user/index');
+        }
+
+    }
+
+
     public function checkname(){
         $name=$this->input->post('uname');
         $this->load->model('user_model');
@@ -67,14 +93,4 @@ class User extends CI_Controller
             echo "success";
         }
     }
-//    public function do_login(){
-//        $name=$this->input->post('uname');
-//        $pass=$this->input->post('pass');
-//        $this->load->model('user_model');
-//        $this->user_model->get_sel($name,$pass);
-//        $rs = $this->user_model->get_insert($name,$pass);
-//
-//    }
 }
-
-?>
