@@ -40,8 +40,8 @@
                         var oSpan=$('<span id="s1">用户名重名</span>');
                         $('#i1').after(oSpan);
                     }
-                })
-            })
+                });
+            });
     });
 </script>
 
