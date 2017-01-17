@@ -12,14 +12,25 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('pagination');
         //$this->load->library
 
     }
       public function index(){
-                $this->load->model('user_model');
-                $rs=$this->user_model->get_data();
+               // $this->load->model('user_model');
+                //$rs=$this->user_model->get_data();
+          $this->load->model('user_model');
+          $rows=$this->user_model->get_allrows();
+         // $allrows=$rows->allrows;
                 //fenye
-                $arr['blog']=$rs;
+                $site=site_url('user/index');
+                 $config['base_url'] ="$site";
+                $config['total_rows'] = $rows;
+                $config['per_page'] = 5;
+                $this->pagination->initialize($config);
+                $startno=$this->uri->segment(3)==null?0:$this->uri->segment(3);
+                $rs=$this->user_model->fenye($startno,$config['per_page']);
+                $arr['bloglist']=$rs;
                 $this->load->view('index.php',$arr);
             }
     public function reg()

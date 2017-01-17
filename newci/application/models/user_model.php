@@ -49,12 +49,15 @@ class User_model extends CI_Model
 
     public function fenye($startno,$pagenum){
             $query=$this->db->get('blog',$pagenum,$startno);
+            return $query->result();
 
     }
 
 
     public function get_allrows(){
-        $query=$this->db->get('fenye');
+       // $query=$this->db->query("select count(*) as allrows from blog");
+        $query=$this->db->count_all('blog');
+        return $query;
     }
 
 }

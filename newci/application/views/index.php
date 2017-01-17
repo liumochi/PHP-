@@ -12,7 +12,7 @@
 
 ?>
 <?php
-    foreach($blog as $a) {
+    foreach($bloglist as $a) {
         ?>
 <h3><?php echo $a->title?></h3>
 <p><?php echo $a->content?></p>
@@ -20,3 +20,4 @@
    <?php
     }
     ?>
+<?php echo $this->pagination->create_links();?>
