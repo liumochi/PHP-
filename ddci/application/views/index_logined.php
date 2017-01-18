@@ -1,5 +1,5 @@
 <?php
-        if($this->session->userdata('logined_in') !='TRUE'){
+        if($this->session->userdata('logged_in') !='TRUE'){
             redirect('blog/unloginindex');
         }
 
@@ -41,7 +41,8 @@
     </div><!-- #EndLibraryItem --><div id="OSC_Topbar">
         <div id="VisitorInfo">
             当前访客身份：
-            Johnny [ <a href="index.htm">退出</a> ]
+            <?php echo $this->session->userdata('name')?> [ <a href="index.htm">退出</a> ]
+            [<a href="blog/center">个人中心</a>]
             <span id="OSC_Notification">
 			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
 																				</span>

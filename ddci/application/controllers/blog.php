@@ -18,6 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $this->load->view('index.php');
 
         }
+        public function center(){
+            $this->load->view(newblog.php);
+        }
 
     }
 ?>

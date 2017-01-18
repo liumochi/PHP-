@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $rs=$this->user_model->get_insert($arr);
             if($rs){
-                redirect("user/login?address=login.php");
+                redirect("user/login?address=heida.php");
             }else{
                 redirect('user/reg');
             }
