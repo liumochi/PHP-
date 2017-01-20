@@ -15,11 +15,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $this->load->view('index_logined.php');
         }
         public function unloginindex(){
-            $this->load->view('index.php');
+            $data=array(
+                array(1,'老单'),
+                array(2,'小吴'),
+                array(3,'老谢'),
+            );
+            $arr['blogs']=$data;
+
+            //var_dump($arr);
+            //die();
+
+            $this->load->view('index.php',$arr);
 
         }
         public function center(){
-            $this->load->view(newblog.php);
+            $this->load->view('adminIndex.php');
         }
 
     }

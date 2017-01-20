@@ -23,15 +23,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $account=$this->input->post('email');
             $pass=$this->input->post('pwd');
             $rs=$this->user_model->get_select($account,$pass);
-            if($rs){
+            if(!$rs){
                 $arr=array(
                     'id'=>$rs->USER_ID,
-                    'name'=>$rs->NAME
+                    'name'=>$rs->NAME,
+                    'logged_in' => TRUE,
                 );
                 $this->session->set_userdata($arr);
-                redirect('user/login');
-            }else{
                 redirect('blog/index');
+            }else{
+                redirect('user/login');
             }
 
         }
