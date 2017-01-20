@@ -6,65 +6,65 @@
  * Time: 10:20
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-    class User extends CI_Controller{
-        public function __construct()
-        {
-            parent::__construct();
-            $this->load->model('user_model');
+class User extends CI_Controller{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('user_model');
 
-        }
-        public function index(){
+    }
+    public function index(){
 
-        }
-        public function login(){
-            $this->load->view('login.php');
-        }
-        public function do_login(){
-            $account=$this->input->post('email');
-            $pass=$this->input->post('pwd');
-            $rs=$this->user_model->get_select($account,$pass);
-            if(!$rs){
-                $arr=array(
-                    'id'=>$rs->USER_ID,
-                    'name'=>$rs->NAME,
-                    'logged_in' => TRUE,
-                );
-                $this->session->set_userdata($arr);
-                redirect('blog/index');
-            }else{
-                redirect('user/login');
-            }
-
-        }
-
-        public function reg(){
-            $this->load->view('reg.php');
-        }
-        public function do_reg(){
-            $account=$this->input->post('email');
-            $name=$this->input->post('name');
-            $pass=$this->input->post('pwd');
-            $gender=$this->input->post('gender');
-            if($gender=='1'){
-                $gname='男';
-            }else{
-                $gname='女';
-            }
+    }
+    public function login(){
+        $this->load->view('login.php');
+    }
+    public function do_login(){
+        $account=$this->input->post('email');
+        $pass=$this->input->post('pwd');
+        $rs=$this->user_model->get_select($account,$pass);
+        if(!$rs){
             $arr=array(
-                'ACCOUNT'=>$account,
-                'PASSWORD'=>$pass,
-                'NAME'=>$name,
-                'GENDER'=>$gname
+                'id'=>$rs->USER_ID,
+                'name'=>$rs->NAME,
+                'logged_in' => TRUE,
             );
-
-            $rs=$this->user_model->get_insert($arr);
-            if($rs){
-                redirect("user/login?address=heida.php");
-            }else{
-                redirect('user/reg');
-            }
-
+            $this->session->set_userdata($arr);
+            redirect('blog/index');
+        }else{
+            redirect('user/login');
         }
 
     }
+
+    public function reg(){
+        $this->load->view('reg.php');
+    }
+    public function do_reg(){
+        $account=$this->input->post('email');
+        $name=$this->input->post('name');
+        $pass=$this->input->post('pwd');
+        $gender=$this->input->post('gender');
+        if($gender=='1'){
+            $gname='男';
+        }else{
+            $gname='女';
+        }
+        $arr=array(
+            'ACCOUNT'=>$account,
+            'PASSWORD'=>$pass,
+            'NAME'=>$name,
+            'GENDER'=>$gname
+        );
+
+        $rs=$this->user_model->get_insert($arr);
+        if($rs){
+            redirect("user/login?address=heida.php");
+        }else{
+            redirect('user/reg');
+        }
+
+    }
+
+}
 ?>
